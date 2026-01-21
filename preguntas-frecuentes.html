@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <title>Preguntas Frecuentes | Caballero De León</title>
+    <meta name="description" content="Preguntas frecuentes sobre servicios financieros, contables, administración de propiedades y arquitectura en Uruguay.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        @media (prefers-color-scheme: dark) {
+            :root { color-scheme: light !important; }
+        }
+        html, body { 
+            color-scheme: light !important; 
+            -webkit-color-scheme: light !important;
+            forced-color-adjust: none !important;
+        }
+        * { color-scheme: light !important; }
+        
+        :root {
+            --negro: #2a2a2a; --gris-oscuro: #4a4a4a; --gris-medio: #707070;
+            --gris-claro: #e8e8e8; --blanco-roto: #f5f5f0; --bronce: #b8956a;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #2a2a2a; background: #f5f5f0; line-height: 1.6; color-scheme: light !important; }
+        header { position: fixed; top: 0; width: 100%; background: rgba(245, 245, 240, 0.98); backdrop-filter: blur(10px); border-bottom: 1px solid var(--gris-claro); z-index: 1000; }
+        nav { max-width: 1400px; margin: 0 auto; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo-container { display: flex; align-items: center; gap: 1rem; }
+        .logo { width: 50px; height: 50px; }
+        .logo-text { font-family: 'Georgia', serif; font-size: 1.3rem; letter-spacing: 0.5px; color: var(--negro); font-weight: 400; text-decoration: none; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--gris-oscuro); text-decoration: none; font-size: 0.95rem; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--bronce); }
+        .lang { display: flex; gap: 0.5rem; }
+        .lang button { background: none; border: none; color: var(--gris-medio); cursor: pointer; font-size: 0.9rem; padding: 0.3rem 0.6rem; }
+        .lang button:hover, .lang button.active { color: var(--bronce); }
+        .btn-agendar { background: var(--bronce); color: white; padding: 0.7rem 1.5rem; text-decoration: none; font-size: 0.9rem; }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .menu-toggle span { width: 25px; height: 2px; background: var(--negro); }
+        .hero { padding: 12rem 3rem 6rem; max-width: 1200px; margin: 0 auto; text-align: center; }
+        h1 { font-family: 'Georgia', serif; font-size: 3.5rem; font-weight: 400; letter-spacing: 1px; margin-bottom: 1.5rem; color: var(--negro); }
+        .hero-subtitle { font-size: 1.2rem; color: var(--gris-oscuro); max-width: 700px; margin: 0 auto; line-height: 1.8; }
+        section { max-width: 900px; margin: 0 auto; padding: 4rem 3rem; }
+        .faq-category { margin-bottom: 4rem; }
+        .category-title { font-family: 'Georgia', serif; font-size: 2rem; font-weight: 400; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--bronce); color: var(--negro); }
+        .faq-item { background: #ffffff; border: 1px solid var(--gris-claro); margin-bottom: 1.5rem; overflow: hidden; color: #2a2a2a; }
+        .faq-question { padding: 1.5rem 2rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s ease; }
+        .faq-question:hover { background: var(--blanco-roto); }
+        .faq-question h3 { font-family: 'Georgia', serif; font-size: 1.2rem; font-weight: 400; color: #2a2a2a; flex: 1; }
+        .faq-toggle { font-size: 1.5rem; color: var(--bronce); transition: transform 0.3s ease; margin-left: 1rem; }
+        .faq-question.active .faq-toggle { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-answer-content { padding: 0 2rem 2rem 2rem; color: #4a4a4a; line-height: 1.9; }
+        .contact-cta { background: #ffffff; border: 1px solid var(--gris-claro); padding: 3rem; text-align: center; margin-top: 4rem; color: #2a2a2a; }
+        .contact-cta h2 { font-family: 'Georgia', serif; font-size: 2rem; font-weight: 400; margin-bottom: 1rem; color: #2a2a2a; }
+        .contact-cta p { color: #4a4a4a; margin-bottom: 2rem; font-size: 1.1rem; }
+        .btn-primary { display: inline-block; background: var(--negro); color: white; padding: 1.2rem 3rem; text-decoration: none; font-size: 1rem; }
+        .btn-primary:hover { background: var(--bronce); }
+        .whatsapp-btn { position: fixed; bottom: 2rem; right: 2rem; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 999; }
+        footer { background: var(--negro); color: #e8e8e8; padding: 4rem 3rem 2rem; margin-top: 6rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+        .footer-section h4 { font-family: 'Georgia', serif; font-size: 1.2rem; margin-bottom: 1.5rem; color: white; }
+        .footer-section p, .footer-section a { color: #e8e8e8; text-decoration: none; line-height: 2; font-size: 0.95rem; }
+        .footer-section a:hover { color: var(--bronce); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid #4a4a4a; text-align: center; font-size: 0.9rem; color: var(--gris-medio); }
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 0; right: -100%; height: 100vh; width: 70%; background: var(--blanco-roto); flex-direction: column; padding: 6rem 2rem; transition: right 0.3s ease; align-items: flex-start; }
+            .nav-links.active { right: 0; }
+            .menu-toggle { display: flex; }
+            h1 { font-size: 2.5rem; }
+            .hero { padding: 8rem 1.5rem 4rem; }
+            section { padding: 3rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <svg class="logo" viewBox="0 0 100 100">
+                    <path d="M 20 35 Q 20 20 35 20 L 50 20 L 50 30 L 35 30 Q 30 30 30 35 L 30 65 Q 30 70 35 70 L 50 70 L 50 80 L 35 80 Q 20 80 20 65 Z" fill="#2a2a2a"/>
+                    <path d="M 55 20 L 75 20 Q 90 20 90 35 L 90 65 Q 90 80 75 80 L 55 80 L 55 70 L 75 70 Q 80 70 80 65 L 80 35 Q 80 30 75 30 L 65 30 L 65 70 L 85 70 L 85 80 L 55 80 Z" fill="#b8956a"/>
+                </svg>
+                <a href="index.html" class="logo-text">Caballero De León</a>
+            </div>
+            <ul class="nav-links" id="nav">
+                <li><a href="index.html#servicios" data-i18n="nav_servicios">Servicios</a></li>
+                <li><a href="index.html#metodo" data-i18n="nav_metodo">Método</a></li>
+                <li><a href="nosotros.html" data-i18n="nav_nosotros">Nosotros</a></li>
+                <li><a href="preguntas-frecuentes.html" data-i18n="nav_faq">FAQ</a></li>
+                <li><a href="index.html#contacto" data-i18n="nav_contacto">Contacto</a></li>
+                <li class="lang">
+                    <button onclick="setLang('es')" class="active">ES</button>
+                    <button onclick="setLang('en')">EN</button>
+                    <button onclick="setLang('pt')">PT</button>
+                </li>
+                <li><a href="index.html#agendar" class="btn-agendar" data-i18n="nav_agendar">Agendar consulta</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="document.getElementById('nav').classList.toggle('active')">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 data-i18n="faq_title">Preguntas Frecuentes</h1>
+        <p class="hero-subtitle">Respondemos las consultas más comunes sobre nuestros servicios financieros, de gestión patrimonial y arquitectura.</p>
+    </section>
+
+    <section>
+        <div class="faq-category">
+            <h2 class="category-title">General</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Qué servicios ofrece Caballero De León?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Trabajamos sobre tres verticales integradas: Financial & Tax Advisory (asesoramiento financiero, fiscal y CFO externo), Property & Asset Management (administración de propiedades y edificios) y Architecture & Design Advisory (proyecto, dirección de obra e interiorismo). El enfoque es integral: si tu caso requiere más de una vertical, articulamos el servicio bajo un solo estándar.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Dónde están ubicados?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Operamos en Montevideo y Punta del Este. Trabajamos con clientes en todo Uruguay y también con no residentes que invierten u operan en el país.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Trabajan con clientes fuera de Uruguay?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Sí. Acompañamos a residentes fiscales en el exterior que tienen activos, operaciones o inversiones en Uruguay. El servicio incluye encuadre fiscal, estructura legal, administración de propiedades y seguimiento documental remoto con reportes periódicos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Cómo es el proceso de trabajo?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Primera consulta para entender tu situación, propuesta de alcance y presupuesto claro, ejecución documentada con seguimiento y reportes según lo acordado. Transparencia total: lo que se decide se documenta, lo que se ejecuta se controla y lo que se reporta queda trazado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category">
+            <h2 class="category-title">Financial & Tax Advisory</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Qué es un CFO Externo y cuándo lo necesito?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Un CFO Externo es dirección financiera a demanda. Lo necesitás cuando tu empresa ya opera y querés tomar decisiones con información clara: control de caja, rentabilidad por línea, presupuesto y seguimiento real. Es el paso natural cuando "estar al día" con impuestos ya no alcanza y necesitás dirigir con datos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Cuánto cuesta el servicio contable para una Pyme?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Depende del volumen de operaciones, forma jurídica (unipersonal, SAS, SRL, SA) y alcance del servicio (solo impuestos, contabilidad completa, nómina, etc.). En la consulta inicial revisamos tu caso y te damos un presupuesto mensual fijo, sin sorpresas. El objetivo es previsibilidad total.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Atienden a no residentes que invierten en Uruguay?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Sí. Trabajamos con no residentes en encuadre fiscal, documentación requerida, estructura legal para operar y seguimiento de obligaciones. La idea es que tu operación en Uruguay esté ordenada desde el inicio: sin improvisar con DGI, BPS o trámites societarios.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Qué forma jurídica me conviene?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Depende de tu actividad, facturación proyectada, socios, responsabilidad patrimonial y encuadre fiscal. En la consulta inicial analizamos tu caso y te recomendamos la estructura más adecuada con criterio de sostenibilidad a largo plazo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category">
+            <h2 class="category-title">Property & Asset Management</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Administran propiedades si estoy en el exterior?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Sí. Es uno de nuestros casos más frecuentes. Coordinamos todo localmente: mantenimiento preventivo y correctivo, proveedores, urgencias, control de servicios y pagos. Te mantenemos informado con reportes periódicos y respondemos consultas por email o WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Qué incluye la administración de un edificio?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Gestión completa de propiedad horizontal: presupuesto anual, liquidación mensual de gastos comunes, cobranza, rendición transparente con documentación respaldada, coordinación de proveedores, control operativo y seguimiento de mejoras. También gestionamos asambleas y documentamos todas las decisiones con actas claras.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Trabajan con alquileres temporales?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Podemos coordinarlo como módulo adicional: check-in/check-out, limpieza entre estadías, mantenimiento, gestión operativa del huésped y control de reservas. Si te interesa, lo estructuramos según tu caso específico.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category">
+            <h2 class="category-title">Architecture & Design Advisory</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Hacen proyectos de obra nueva o solo reformas?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Hacemos ambos. Obra nueva, ampliaciones, reformas integrales y puesta a punto de propiedades existentes. El enfoque siempre es valorización del activo con criterio de durabilidad, mantenimiento y uso real. No diseñamos solo para fotos: diseñamos para que el espacio funcione en el tiempo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Dirigen la obra o solo diseñan?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Podemos hacer solo diseño, solo dirección de obra, o ambos integrados. Lo más común es que nos encarguemos del proceso completo: proyecto ejecutivo, presupuestación, contratación de proveedores y dirección de obra hasta la entrega. Así tenés continuidad y control en todas las etapas.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>¿Cómo funciona el seguimiento de presupuesto en obra?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Armamos un presupuesto base con metrajes y alcances claros. Durante la obra, controlamos cada gasto vs. presupuesto y gestionamos desvíos antes de que impacten. Recibís reportes periódicos con estado financiero de la obra: ejecutado, pendiente y proyección de cierre.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-cta">
+            <h2>¿No encontraste tu respuesta?</h2>
+            <p>Agendá una consulta inicial o escribinos directamente. Respondemos todas las consultas en menos de 24 horas.</p>
+            <a href="index.html#agendar" class="btn-primary">Agendar consulta</a>
+        </div>
+    </section>
+
+    <a href="https://wa.me/59893941111?text=Hola, tengo una consulta" class="whatsapp-btn">💬</a>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Caballero De León</h4>
+                <p>Un estudio guiado por profesionales en finanzas, gestión y arquitectura. Trabajamos con método, documentación y seguimiento.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Servicios</h4>
+                <p><a href="financial-tax-advisory.html">Financial & Tax Advisory</a></p>
+                <p><a href="property-asset-management.html">Property & Asset Management</a></p>
+                <p><a href="architecture-design-advisory.html">Architecture & Design Advisory</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p>Montevideo y Punta del Este</p>
+                <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="40282f2c2100232122212c2c25322f24252c252f2e6e232f2d">[email&#160;protected]</a></p>
+                <p><a href="tel:+59893941111">+598 93 941 111</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Caballero De León. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav').classList.toggle('active');
+        }
+
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = element.querySelector('.faq-icon');
+            
+            if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
+                answer.style.maxHeight = '0px';
+                icon.textContent = '+';
+            } else {
+                document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = '0px');
+                document.querySelectorAll('.faq-icon').forEach(i => i.textContent = '+');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.textContent = '−';
+            }
+        }
+
+        const translations = {
+            es: {
+                nav_servicios: "Servicios",
+                nav_metodo: "Método",
+                nav_nosotros: "Nosotros",
+                nav_faq: "FAQ",
+                nav_contacto: "Contacto",
+                nav_agendar: "Agendar consulta",
+                faq_title: "Preguntas Frecuentes",
+                faq_subtitle: "Todo lo que necesitas saber sobre nuestros servicios"
+            },
+            en: {
+                nav_servicios: "Services",
+                nav_metodo: "Method",
+                nav_nosotros: "About",
+                nav_faq: "FAQ",
+                nav_contacto: "Contact",
+                nav_agendar: "Schedule consultation",
+                faq_title: "Frequently Asked Questions",
+                faq_subtitle: "Everything you need to know about our services"
+            },
+            pt: {
+                nav_servicios: "Serviços",
+                nav_metodo: "Método",
+                nav_nosotros: "Sobre nós",
+                nav_faq: "FAQ",
+                nav_contacto: "Contato",
+                nav_agendar: "Agendar consulta",
+                faq_title: "Perguntas Frequentes",
+                faq_subtitle: "Tudo o que você precisa saber sobre nossos serviços"
+            }
+        };
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            localStorage.setItem('lang', lang);
+            const t = translations[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('lang');
+            if (saved && saved !== 'es') {
+                const btn = document.querySelector(`.lang button[onclick*="${saved}"]`);
+                if (btn) btn.click();
+            }
+        });
+    </script>
+</body>
+</html>

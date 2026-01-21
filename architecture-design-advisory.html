@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <title>Architecture & Design Advisory | Caballero De León</title>
+    <meta name="description" content="Arquitectura y diseño con foco en valorización. Proyecto, dirección de obra y control en Punta del Este y Montevideo.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        @media (prefers-color-scheme: dark) {
+            :root { color-scheme: light !important; }
+        }
+        html, body { 
+            color-scheme: light !important; 
+            -webkit-color-scheme: light !important;
+            forced-color-adjust: none !important;
+        }
+        * { color-scheme: light !important; }
+        
+        :root {
+            --negro: #2a2a2a; --gris-oscuro: #4a4a4a; --gris-medio: #707070;
+            --gris-claro: #e8e8e8; --blanco-roto: #f5f5f0; --bronce: #b8956a;
+            --azul: #2c5f77; --azul-hover: #234a5e;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #2a2a2a; background: #f5f5f0; line-height: 1.6; color-scheme: light !important; }
+        header { position: fixed; top: 0; width: 100%; background: rgba(245, 245, 240, 0.98); backdrop-filter: blur(10px); border-bottom: 1px solid var(--gris-claro); z-index: 1000; }
+        nav { max-width: 1400px; margin: 0 auto; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo-container { display: flex; align-items: center; gap: 1rem; }
+        .logo { width: 50px; height: 50px; }
+        .logo-text { font-family: 'Georgia', serif; font-size: 1.3rem; letter-spacing: 0.5px; color: var(--negro); font-weight: 400; text-decoration: none; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--gris-oscuro); text-decoration: none; font-size: 0.95rem; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--azul); }
+        .lang { display: flex; gap: 0.5rem; }
+        .lang button { background: none; border: none; color: var(--gris-medio); cursor: pointer; font-size: 0.9rem; padding: 0.3rem 0.6rem; }
+        .lang button:hover, .lang button.active { color: var(--azul); }
+        .btn-agendar { background: var(--azul); color: white; padding: 0.7rem 1.5rem; text-decoration: none; font-size: 0.9rem; }
+        .btn-agendar:hover { background: var(--azul-hover); }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .menu-toggle span { width: 25px; height: 2px; background: var(--negro); }
+        .hero { padding: 12rem 3rem 6rem; max-width: 1200px; margin: 0 auto; }
+        .breadcrumb { font-size: 0.9rem; color: var(--gris-oscuro); margin-bottom: 2rem; }
+        .breadcrumb a { color: var(--gris-oscuro); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--azul); }
+        h1 { font-family: 'Georgia', serif; font-size: 3.5rem; font-weight: 400; letter-spacing: 1px; margin-bottom: 1.5rem; color: var(--negro); }
+        .hero-subtitle { font-size: 1.4rem; color: var(--gris-oscuro); max-width: 800px; line-height: 1.8; margin-bottom: 3rem; }
+        .cta-group { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .btn-primary { display: inline-block; background: var(--negro); color: white; padding: 1.2rem 3rem; text-decoration: none; font-size: 1rem; }
+        .btn-primary:hover { background: var(--azul); }
+        .btn-secondary { display: inline-block; background: transparent; color: var(--negro); padding: 1.2rem 3rem; text-decoration: none; font-size: 1rem; border: 1px solid var(--negro); }
+        .btn-secondary:hover { background: var(--negro); color: white; }
+        section { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; }
+        h2 { font-family: 'Georgia', serif; font-size: 2.5rem; font-weight: 400; margin-bottom: 2rem; color: var(--negro); }
+        .intro-text { font-size: 1.15rem; line-height: 1.9; color: var(--gris-oscuro); margin-bottom: 4rem; }
+        .service-type { background: #ffffff; border: 1px solid var(--gris-claro); border-left: 3px solid var(--azul); padding: 3rem; margin-bottom: 2.5rem; color: var(--negro); }
+        .service-type h3 { font-family: 'Georgia', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 1.5rem; color: #2a2a2a; }
+        .service-type p { color: #4a4a4a; line-height: 1.8; margin-bottom: 1rem; }
+        .interiorismo-box { background: #f5f5f0; border: 1px solid var(--gris-claro); padding: 3rem; margin-top: 3rem; color: var(--negro); }
+        .interiorismo-box h3 { font-family: 'Georgia', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 1.5rem; color: #2a2a2a; }
+        .interiorismo-box p { color: #4a4a4a; line-height: 1.8; }
+        .deliverables-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .deliverable-item { background: #ffffff; border: 1px solid var(--gris-claro); padding: 2rem; color: var(--negro); }
+        .deliverable-item h4 { font-family: 'Georgia', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 1rem; color: #2a2a2a; }
+        .deliverable-item p { color: #4a4a4a; font-size: 0.95rem; line-height: 1.7; }
+        .faq-section { background: #ffffff; border: 1px solid var(--gris-claro); padding: 4rem 3rem; margin-top: 4rem; color: var(--negro); }
+        .faq-item { border-bottom: 1px solid var(--gris-claro); padding: 2rem 0; }
+        .faq-item h4 { font-family: 'Georgia', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 1rem; color: #2a2a2a; }
+        .faq-item p { color: #4a4a4a; line-height: 1.8; }
+        .contact-cta { background: var(--negro); color: white; padding: 5rem 3rem; text-align: center; margin-top: 6rem; }
+        .contact-cta h2 { color: white; margin-bottom: 1.5rem; }
+        .contact-cta p { color: #e8e8e8; font-size: 1.2rem; margin-bottom: 2.5rem; }
+        .whatsapp-btn { position: fixed; bottom: 2rem; right: 2rem; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 999; }
+        footer { background: var(--negro); color: #e8e8e8; padding: 4rem 3rem 2rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+        .footer-section h4 { font-family: 'Georgia', serif; font-size: 1.2rem; margin-bottom: 1.5rem; color: white; }
+        .footer-section p, .footer-section a { color: #e8e8e8; text-decoration: none; line-height: 2; font-size: 0.95rem; }
+        .footer-section a:hover { color: var(--azul); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid #4a4a4a; text-align: center; font-size: 0.9rem; color: var(--gris-medio); }
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 0; right: -100%; height: 100vh; width: 70%; background: var(--blanco-roto); flex-direction: column; padding: 6rem 2rem; transition: right 0.3s ease; align-items: flex-start; }
+            .nav-links.active { right: 0; }
+            .menu-toggle { display: flex; }
+            h1 { font-size: 2.5rem; }
+            .hero { padding: 8rem 1.5rem 4rem; }
+            section { padding: 3rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <svg class="logo" viewBox="0 0 100 100">
+                    <path d="M 20 35 Q 20 20 35 20 L 50 20 L 50 30 L 35 30 Q 30 30 30 35 L 30 65 Q 30 70 35 70 L 50 70 L 50 80 L 35 80 Q 20 80 20 65 Z" fill="#2a2a2a"/>
+                    <path d="M 55 20 L 75 20 Q 90 20 90 35 L 90 65 Q 90 80 75 80 L 55 80 L 55 70 L 75 70 Q 80 70 80 65 L 80 35 Q 80 30 75 30 L 65 30 L 65 70 L 85 70 L 85 80 L 55 80 Z" fill="#b8956a"/>
+                </svg>
+                <a href="index.html" class="logo-text">Caballero De León</a>
+            </div>
+            <ul class="nav-links" id="nav">
+                <li><a href="index.html#servicios" data-i18n="nav_servicios">Servicios</a></li>
+                <li><a href="index.html#metodo" data-i18n="nav_metodo">Método</a></li>
+                <li><a href="nosotros.html" data-i18n="nav_nosotros">Nosotros</a></li>
+                <li><a href="preguntas-frecuentes.html" data-i18n="nav_faq">FAQ</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li class="lang">
+                    <button onclick="setLang('es')" class="active">ES</button>
+                    <button onclick="setLang('en')">EN</button>
+                    <button onclick="setLang('pt')">PT</button>
+                </li>
+                <li><a href="index.html#agendar" class="btn-agendar" data-i18n="nav_agendar">Agendar consulta</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="document.getElementById('nav').classList.toggle('active')">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="breadcrumb"><a href="index.html">Inicio</a> / <span>Architecture & Design Advisory</span></div>
+        <h1>Architecture & Design Advisory</h1>
+        <p class="hero-subtitle">Arquitectura y diseño con foco en valorización y ejecución: proyecto, presupuestación, contratación y dirección de obra. Decisiones claras, comparables y controladas.</p>
+        <div class="cta-group">
+            <a href="index.html#agendar" class="btn-primary">Agendar consulta</a>
+            <a href="#como-trabajamos" class="btn-secondary">Conocer más</a>
+        </div>
+    </section>
+
+    <section id="como-trabajamos" style="background: #f5f5f0 !important; color: #2a2a2a !important;">
+        <p class="intro-text" style="color: #4a4a4a !important;">La mayoría de los problemas en obra vienen por alcance mal definido, presupuestos incomparables y falta de seguimiento. Nuestro trabajo es ordenar esas variables: definir, presupuestar con criterio, contratar con comparabilidad y dirigir con control.</p>
+        <h2 style="color: #2a2a2a !important;">Tres formas de trabajo</h2>
+        <div class="service-type">
+            <h3>1) Proyecto y diseño (de la idea al proyecto ejecutivo)</h3>
+            <p>Relevamiento, anteproyecto, definiciones técnicas y documentación para ejecutar sin improvisación. Diseño con criterio de durabilidad, mantenimiento y uso real.</p>
+            <p><strong>Incluye:</strong> Relevamiento del estado actual, anteproyecto con alternativas de diseño, definición de materiales y soluciones técnicas, proyecto ejecutivo completo y documentación lista para cotizar y construir.</p>
+        </div>
+        <div class="service-type">
+            <h3>2) Presupuestación, comparativos y contratación</h3>
+            <p>Armado de alcance, metrajes, pedidos de cotización y comparativos. Te damos una base defendible para elegir proveedor y evitar desvíos por indefinición.</p>
+            <p><strong>Incluye:</strong> Metrajes y cuantificación por rubro, armado de alcance técnico, pedido de cotizaciones a proveedores calificados, comparativos técnico-económicos y recomendación fundamentada.</p>
+        </div>
+        <div class="service-type">
+            <h3>3) Dirección y seguimiento de obra</h3>
+            <p>Coordinación de rubros, control de avance, calidad y costos. Reporte de obra y gestión temprana de desvíos, para llegar a entrega con previsibilidad.</p>
+            <p><strong>Incluye:</strong> Coordinación entre contratistas, control de cronograma, supervisión de calidad, gestión de desvíos, control de costos, reporte periódico y recepción final.</p>
+        </div>
+        <div class="interiorismo-box">
+            <h3>Interiorismo y puesta a punto</h3>
+            <p>Si además querés resolver interiorismo, equipamiento y decisiones de compra/terminaciones, lo trabajamos como etapa final: diseño interior, selección de mobiliario, definición de terminaciones y seguimiento hasta dejar el espacio listo para uso o renta.</p>
+        </div>
+    </section>
+
+    <section style="background: #ffffff !important; border-top: 1px solid var(--gris-claro); border-bottom: 1px solid var(--gris-claro); color: #2a2a2a !important;">
+        <h2 style="color: #2a2a2a !important;">Qué recibís</h2>
+        <p class="intro-text" style="color: #4a4a4a !important;">Entregables diseñados para que tengas control en cada etapa:</p>
+        <div class="deliverables-grid">
+            <div class="deliverable-item">
+                <h4>Alcance definido</h4>
+                <p>Qué se hace y qué no, con límites claros. Esto evita los "extras" eternos que disparan presupuestos.</p>
+            </div>
+            <div class="deliverable-item">
+                <h4>Presupuesto comparativo</h4>
+                <p>Cotizaciones técnicamente comparables y plan de obra por etapas. Sabés qué esperar y cuándo.</p>
+            </div>
+            <div class="deliverable-item">
+                <h4>Seguimiento con reportes</h4>
+                <p>Reportes de avance con control de cronograma, calidad y costos. No hay sorpresas en la entrega.</p>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: #f5f5f0 !important; color: #2a2a2a !important;">
+        <div class="faq-section">
+            <h2 style="color: #2a2a2a !important;">Preguntas frecuentes</h2>
+            <div class="faq-item">
+                <h4>¿Hacen proyectos de obra nueva o solo reformas?</h4>
+                <p>Hacemos ambos. Obra nueva, ampliaciones, reformas integrales y puesta a punto de propiedades existentes. El enfoque siempre es valorización del activo con criterio de durabilidad y uso real.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Dirigen la obra o solo diseñan?</h4>
+                <p>Podemos hacer solo diseño, solo dirección de obra, o ambos integrados. Lo más común es que nos encarguemos del proceso completo: proyecto, presupuestación, contratación y dirección hasta la entrega.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Cómo funciona el seguimiento de presupuesto?</h4>
+                <p>Armamos un presupuesto base con metrajes y alcances claros. Durante la obra, controlamos cada gasto vs. presupuesto y gestionamos desvíos antes de que impacten. Recibís reportes periódicos con estado financiero de la obra.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Trabajan con propiedades que están en administración?</h4>
+                <p>Sí. Si tu propiedad está bajo nuestra administración (Property & Asset Management), la coordinación es directa. Si está en administración externa, coordinamos igualmente con tu aprobación en cada etapa clave.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="contact-cta" id="contacto">
+        <h2>Ejecutá con control y previsibilidad</h2>
+        <p>Si querés hacer una reforma o una obra sin perder tiempo gestionando todo, conversemos.</p>
+        <div class="cta-group" style="justify-content: center;">
+            <a href="index.html#agendar" class="btn-primary" style="background: white; color: var(--negro);">Agendar consulta</a>
+            <a href="index.html#contacto" class="btn-secondary" style="border-color: white; color: white;">Escribir email</a>
+        </div>
+    </div>
+
+    <a href="https://wa.me/59893941111?text=Hola, quiero consultar sobre Architecture %26 Design" class="whatsapp-btn">💬</a>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Caballero De León</h4>
+                <p>Un estudio guiado por profesionales en finanzas, gestión y arquitectura. Trabajamos con método, documentación y seguimiento.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Servicios</h4>
+                <p><a href="financial-tax-advisory.html">Financial & Tax Advisory</a></p>
+                <p><a href="property-asset-management.html">Property & Asset Management</a></p>
+                <p><a href="architecture-design-advisory.html">Architecture & Design Advisory</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p>Montevideo y Punta del Este</p>
+                <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a6265666b4a696b686b66666f78656e6f666f656424696567">[email&#160;protected]</a></p>
+                <p><a href="tel:+59893941111">+598 93 941 111</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Caballero De León. Todos los derechos rese    <script>
+        function toggleMenu() {
+            document.getElementById('nav').classList.toggle('active');
+        }
+
+        // Traducciones
+        const translations = {
+            es: {
+                nav_servicios: "Servicios",
+                nav_metodo: "Método",
+                nav_nosotros: "Nosotros",
+                nav_faq: "FAQ",
+                nav_contacto: "Contacto",
+                nav_agendar: "Agendar consulta"
+            },
+            en: {
+                nav_servicios: "Services",
+                nav_metodo: "Method",
+                nav_nosotros: "About",
+                nav_faq: "FAQ",
+                nav_contacto: "Contact",
+                nav_agendar: "Schedule consultation"
+            },
+            pt: {
+                nav_servicios: "Serviços",
+                nav_metodo: "Método",
+                nav_nosotros: "Sobre nós",
+                nav_faq: "FAQ",
+                nav_contacto: "Contato",
+                nav_agendar: "Agendar consulta"
+            }
+        };
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            localStorage.setItem('lang', lang);
+            const t = translations[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('lang');
+            if (saved && saved !== 'es') {
+                const btn = document.querySelector(`.lang button[onclick*="${saved}"]`);
+                if (btn) btn.click();
+            }
+        });
+    </script>
+</body>
+</html>

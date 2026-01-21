@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <title>Nosotros | Caballero De León</title>
+    <meta name="description" content="Equipo profesional de Caballero De León. Experiencia en finanzas, gestión patrimonial y arquitectura en Uruguay.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            color-scheme: light only;
+            --negro: #2a2a2a;
+            --gris-oscuro: #4a4a4a;
+            --gris-medio: #707070;
+            --gris-claro: #e8e8e8;
+            --blanco-roto: #f5f5f0;
+            --bronce: #b8956a;
+            --bronce-hover: #a17d4f;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--negro);
+            background: var(--blanco-roto);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(245, 245, 240, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gris-claro);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-text {
+            font-family: 'Georgia', serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+            color: var(--negro);
+            font-weight: 400;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--gris-oscuro);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--bronce);
+        }
+
+        .lang {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang button {
+            background: none;
+            border: none;
+            color: var(--gris-medio);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.6rem;
+            transition: color 0.3s ease;
+        }
+
+        .lang button:hover,
+        .lang button.active {
+            color: var(--bronce);
+        }
+
+        .btn-agendar {
+            background: var(--bronce);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-agendar:hover {
+            background: var(--bronce-hover);
+            color: white !important;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--negro);
+        }
+
+        .hero {
+            padding: 12rem 3rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Georgia', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            color: var(--negro);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--gris-oscuro);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 3rem;
+        }
+
+        h2 {
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: var(--negro);
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--gris-oscuro);
+            margin-bottom: 4rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .team-member {
+            background: white;
+            border: 1px solid var(--gris-claro);
+            padding: 3rem;
+        }
+
+        .member-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            border: 3px solid var(--gris-claro);
+        }
+
+        .team-member h3 {
+            font-family: 'Georgia', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: var(--negro);
+        }
+
+        .member-role {
+            color: var(--bronce);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            letter-spacing: 0.3px;
+        }
+
+        .member-bio {
+            color: var(--gris-medio);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .member-expertise {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gris-claro);
+        }
+
+        .member-expertise h4 {
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--negro);
+        }
+
+        .member-expertise p {
+            color: var(--gris-medio);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .values-section {
+            background: white;
+            border: 1px solid var(--gris-claro);
+            padding: 4rem 3rem;
+            margin-top: 4rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .value-item h4 {
+            font-family: 'Georgia', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--negro);
+        }
+
+        .value-item p {
+            color: var(--gris-medio);
+            line-height: 1.8;
+        }
+
+        .contact-cta {
+            background: var(--negro);
+            color: white;
+            padding: 5rem 3rem;
+            text-align: center;
+            margin-top: 6rem;
+        }
+
+        .contact-cta h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-cta p {
+            color: var(--gris-claro);
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: white;
+            color: var(--negro);
+            padding: 1.2rem 3rem;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--bronce);
+            color: white;
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            background: var(--negro);
+            color: var(--gris-claro);
+            padding: 4rem 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Georgia', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--gris-claro);
+            text-decoration: none;
+            line-height: 2;
+            font-size: 0.95rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--bronce);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gris-oscuro);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--gris-medio);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background: var(--blanco-roto);
+                flex-direction: column;
+                padding: 6rem 2rem;
+                transition: right 0.3s ease;
+                border-left: 1px solid var(--gris-claro);
+                align-items: flex-start;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero {
+                padding: 8rem 1.5rem 4rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <svg class="logo" viewBox="0 0 100 100">
+                    <path d="M 20 35 Q 20 20 35 20 L 50 20 L 50 30 L 35 30 Q 30 30 30 35 L 30 65 Q 30 70 35 70 L 50 70 L 50 80 L 35 80 Q 20 80 20 65 Z" fill="#2a2a2a"/>
+                    <path d="M 55 20 L 75 20 Q 90 20 90 35 L 90 65 Q 90 80 75 80 L 55 80 L 55 70 L 75 70 Q 80 70 80 65 L 80 35 Q 80 30 75 30 L 65 30 L 65 70 L 85 70 L 85 80 L 55 80 Z" fill="#b8956a"/>
+                </svg>
+                <a href="index.html" class="logo-text">Caballero De León</a>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#servicios" data-i18n="nav_servicios">Servicios</a></li>
+                <li><a href="index.html#metodo" data-i18n="nav_metodo">Método</a></li>
+                <li><a href="nosotros.html" data-i18n="nav_nosotros">Nosotros</a></li>
+                <li><a href="preguntas-frecuentes.html" data-i18n="nav_faq">FAQ</a></li>
+                <li><a href="index.html#contacto" data-i18n="nav_contacto">Contacto</a></li>
+                <li class="lang">
+                    <button onclick="setLang('es')" class="active">ES</button>
+                    <button onclick="setLang('en')">EN</button>
+                    <button onclick="setLang('pt')">PT</button>
+                </li>
+                <li><a href="index.html#agendar" class="btn-agendar" data-i18n="nav_agendar">Agendar consulta</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 data-i18n="hero_title">Nosotros</h1>
+        <p class="hero-subtitle" data-i18n="hero_subtitle">Un estudio guiado por profesionales con experiencia en finanzas, gestión y arquitectura. Trabajamos con método, documentación y seguimiento.</p>
+    </section>
+
+    <section>
+        <p class="intro-text" data-i18n="intro_text">Caballero De León nace de la convicción de que la complejidad patrimonial requiere visión integrada. No es suficiente con resolver piezas sueltas: el valor está en la coherencia entre lo financiero, lo fiscal, lo operativo y lo espacial. Nuestro enfoque combina experiencia técnica con criterio de largo plazo, para que empresas, familias y propietarios tomen decisiones con respaldo real.</p>
+
+        <h2 data-i18n="team_title">Equipo</h2>
+
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="https://i.imgur.com/placeholder-noel.jpg" alt="Noel Caballero" class="member-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="width: 180px; height: 180px; border-radius: 50%; background: var(--negro); color: var(--bronce); display: none; align-items: center; justify-content: center; font-family: Georgia, serif; font-size: 3rem; margin-bottom: 2rem; border: 3px solid var(--gris-claro);">NC</div>
+                <h3>Noel Caballero</h3>
+                <p class="member-role">Director · Financial & Tax Advisory</p>
+                <p class="member-bio">Contador Público con MBA y más de 17 años de experiencia en gestión administrativa, financiera y dirección general. Trayectoria comprobada en sectores de construcción, tecnología y comercio corporativo, con enfoque en optimización de procesos, planificación estratégica y liderazgo de equipos multidisciplinarios.</p>
+                <p class="member-bio">Ha ocupado posiciones de dirección general, gerencia financiera y asesoramiento contable-fiscal para empresas, fondos institucionales y organizaciones sectoriales. Especializado en implementación de sistemas de control de gestión, CFO externo y estructuración empresarial.</p>
+                <div class="member-expertise">
+                    <h4>Áreas de especialización</h4>
+                    <p>Dirección financiera · CFO externo · Planificación fiscal · Control de gestión y KPIs · Estructuración empresarial · Auditorías y diagnósticos</p>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <img src="https://i.imgur.com/placeholder-vale.jpg" alt="Valentina De León" class="member-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="width: 180px; height: 180px; border-radius: 50%; background: var(--negro); color: var(--bronce); display: none; align-items: center; justify-content: center; font-family: Georgia, serif; font-size: 3rem; margin-bottom: 2rem; border: 3px solid var(--gris-claro);">VDL</div>
+                <h3>Valentina De León</h3>
+                <p class="member-role">Directora · Architecture & Design Advisory</p>
+                <p class="member-bio">Arquitecta con formación internacional (Master in Architecture, Hochschule Anhalt, Alemania) y experiencia profesional en Uruguay y Estados Unidos. Especializada en diseño arquitectónico, interiorismo y asesoramiento inmobiliario, con enfoque en valorización de activos y funcionalidad de largo plazo.</p>
+                <p class="member-bio">Trayectoria en estudios de arquitectura, gestión de proyectos residenciales y comerciales, y asesoramiento en bienes raíces. Combina visión de diseño con comprensión del mercado inmobiliario para proyectos que generan valor tangible y sostenible en el tiempo.</p>
+                <div class="member-expertise">
+                    <h4>Áreas de especialización</h4>
+                    <p>Proyecto arquitectónico y ejecutivo · Dirección de obra · Interiorismo · Real estate advisory · Valorización de activos inmobiliarios · Diseño funcional y durable</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="values-section">
+            <h2 data-i18n="values_title">Cómo trabajamos</h2>
+            <p class="intro-text" style="margin-bottom: 2rem;">Trabajamos con un estándar único, aplicable a todas las verticales del estudio:</p>
+            
+            <div class="values-grid">
+                <div class="value-item">
+                    <h4>Criterio</h4>
+                    <p>Priorizamos decisiones defendibles y sostenibles en el tiempo. No buscamos el atajo: buscamos la solución que resiste.</p>
+                </div>
+                <div class="value-item">
+                    <h4>Estructura</h4>
+                    <p>Lo legal, lo fiscal y lo operativo perfectamente alineados. Cada decisión se toma considerando el impacto integral.</p>
+                </div>
+                <div class="value-item">
+                    <h4>Seguimiento</h4>
+                    <p>Lo que se decide se documenta; lo que se ejecuta se controla; lo que se reporta queda trazado. Sin improvisación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="contact-cta">
+        <h2 data-i18n="cta_title">Trabajemos juntos</h2>
+        <p data-i18n="cta_text">Si tu prioridad es tomar decisiones con respaldo y ejecutar con previsibilidad, conversemos.</p>
+        <a href="index.html#agendar" class="btn-primary"data-i18n="cta_button">Agendar consulta</a>
+    </div>
+
+    <a href="https://wa.me/59893941111?text=Hola, quiero conocer más sobre el estudio" class="whatsapp-btn" target="_blank" aria-label="Contactar por WhatsApp">
+        <span>💬</span>
+    </a>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Caballero De León</h4>
+                <p>Un estudio guiado por profesionales en finanzas, gestión y arquitectura. Trabajamos con método, documentación y seguimiento, para sostener decisiones defendibles en el tiempo.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Servicios</h4>
+                <p><a href="financial-tax-advisory.html">Financial & Tax Advisory</a></p>
+                <p><a href="property-asset-management.html">Property & Asset Management</a></p>
+                <p><a href="architecture-design-advisory.html">Architecture & Design Advisory</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p>Montevideo y Punta del Este</p>
+                <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe9691929fbe9d9f9c9f92929b8c919a9b929b9190d09d9193">[email&#160;protected]</a></p>
+                <p><a href="tel:+59893941111">+598 93 941 111</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Caballero De León. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        const translations = {
+            es: {
+                nav_servicios: "Servicios",
+                nav_metodo: "Método",
+                nav_nosotros: "Nosotros",
+                nav_faq: "FAQ",
+                nav_contacto: "Contacto",
+                nav_agendar: "Agendar consulta",
+                hero_title: "Nosotros",
+                hero_subtitle: "Un estudio guiado por profesionales con experiencia en finanzas, gestión y arquitectura. Trabajamos con método, documentación y seguimiento.",
+                intro_text: "Caballero De León nace de la convicción de que la complejidad patrimonial requiere visión integrada. No es suficiente con resolver piezas sueltas: el valor está en la coherencia entre lo financiero, lo fiscal, lo operativo y lo espacial. Nuestro enfoque combina experiencia técnica con criterio de largo plazo, para que empresas, familias y propietarios tomen decisiones con respaldo real.",
+                team_title: "Equipo",
+                values_title: "Cómo trabajamos",
+                cta_title: "Trabajemos juntos",
+                cta_text: "Si tu prioridad es tomar decisiones con respaldo y ejecutar con previsibilidad, conversemos.",
+                cta_button: "Agendar consulta"
+            },
+            en: {
+                nav_servicios: "Services",
+                nav_metodo: "Method",
+                nav_nosotros: "About",
+                nav_faq: "FAQ",
+                nav_contacto: "Contact",
+                nav_agendar: "Schedule consultation",
+                hero_title: "About Us",
+                hero_subtitle: "A studio led by professionals with experience in finance, management and architecture. We work with method, documentation and follow-up.",
+                intro_text: "Caballero De León was born from the conviction that wealth complexity requires an integrated vision. It is not enough to solve loose pieces: the value lies in the coherence between financial, tax, operational and spatial aspects. Our approach combines technical experience with long-term judgment, so that companies, families and owners make decisions with real support.",
+                team_title: "Team",
+                values_title: "How we work",
+                cta_title: "Let's work together",
+                cta_text: "If your priority is to make decisions with support and execute with predictability, let's talk.",
+                cta_button: "Schedule consultation"
+            },
+            pt: {
+                nav_servicios: "Serviços",
+                nav_metodo: "Método",
+                nav_nosotros: "Sobre nós",
+                nav_faq: "FAQ",
+                nav_contacto: "Contato",
+                nav_agendar: "Agendar consulta",
+                hero_title: "Sobre Nós",
+                hero_subtitle: "Um estúdio guiado por profissionais com experiência em finanças, gestão e arquitetura. Trabalhamos com método, documentação e acompanhamento.",
+                intro_text: "Caballero De León nasce da convicção de que a complexidade patrimonial requer visão integrada. Não é suficiente resolver peças soltas: o valor está na coerência entre o financeiro, o fiscal, o operacional e o espacial. Nossa abordagem combina experiência técnica com critério de longo prazo, para que empresas, famílias e proprietários tomem decisões com respaldo real.",
+                team_title: "Equipe",
+                values_title: "Como trabalhamos",
+                cta_title: "Vamos trabalhar juntos",
+                cta_text: "Se sua prioridade é tomar decisões com respaldo e executar com previsibilidade, vamos conversar.",
+                cta_button: "Agendar consulta"
+            }
+        };
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            localStorage.setItem('lang', lang);
+            const t = translations[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('lang');
+            if (saved && saved !== 'es') {
+                const btn = document.querySelector(`.lang button[onclick*="${saved}"]`);
+                if (btn) btn.click();
+            }
+        });
+    </script>
+</body>
+</html>
